@@ -1,0 +1,29 @@
+There is opportunity for some streamlining/automation of the searching phase, but that is not what im initially talking about.
+
+Individual employees shift from participating in all three phases to continuing their existing searching processes. 
+
+They either:
+A1. Contact Suppliers
+A2. Contact transportation companies
+A3. Go on websites to download billing information.
+
+The output of this phase is unstructured data of some kind. The employee can have any form of output of data, no matter what it is.
+- The text content of an email
+- A billing PDF
+- An image
+
+This is the end of the searching phase. The employee with subject matter expertise outputs the unstructured data, but knows that the data is accurate in this file. 
+
+
+Recording Phase:
+An AI agent lives in a folder with access to all of this data, as well as an excel template. It knows what data it is supposed to pull, it knows how to do specific calculations. It is highly rules based, it does not go off and do what it wants. It understands the processes.
+
+The agent processes the data files and writes it to the excel.
+
+A review agent that is trained on company processes verifies data accuracy, if anything is wrong, it elevates it back up to the main agent to redo the data extraction of that specific data field. This loops until it is accurate.
+
+The final output of the record phase is done WITHOUT human interaction is an output excel file. 
+
+Upload & Review Stage Begins.
+
+A human opens the folder of (preferably sorted in the order of excel) and goes through them, checking the accuracy of the excel to the file. All that matters is match of excel to file. Then the employee uploads it.
