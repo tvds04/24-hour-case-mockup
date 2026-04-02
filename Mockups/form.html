@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Supplier EPD Portal - Data Entry</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .slanted-divider {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%);
+        }
+        .ghost-border {
+            outline: 1px solid rgba(188, 200, 206, 0.15);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#ffffff",
+                        "surface": "#f9f9f9",
+                        "on-secondary-fixed-variant": "#474747",
+                        "error-container": "#ffdad6",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f3f3",
+                        "outline-variant": "#bcc8ce",
+                        "tertiary-fixed-dim": "#c7c6c6",
+                        "on-tertiary-fixed": "#1b1c1c",
+                        "surface-dim": "#dadada",
+                        "surface-container-high": "#e8e8e8",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#00afd7",
+                        "outline": "#6d797e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#c8c6c6",
+                        "primary": "#006780",
+                        "on-tertiary-container": "#373838",
+                        "surface-tint": "#006780",
+                        "surface-container-highest": "#e2e2e2",
+                        "inverse-on-surface": "#f1f1f1",
+                        "inverse-primary": "#51d5ff",
+                        "surface-bright": "#f9f9f9",
+                        "tertiary-container": "#a1a1a1",
+                        "secondary": "#5f5e5e",
+                        "secondary-container": "#e4e2e1",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed": "#e3e2e2",
+                        "surface-variant": "#e2e2e2",
+                        "on-tertiary-fixed-variant": "#464747",
+                        "on-surface-variant": "#3d494e",
+                        "on-surface": "#1a1c1c",
+                        "primary-fixed-dim": "#51d5ff",
+                        "surface-container": "#eeeeee",
+                        "on-error-container": "#93000a",
+                        "on-primary-container": "#003d4d",
+                        "on-secondary-container": "#656464",
+                        "primary-fixed": "#b7eaff",
+                        "on-primary-fixed": "#001f28",
+                        "background": "#f9f9f9",
+                        "on-secondary-fixed": "#1b1c1c",
+                        "on-primary-fixed-variant": "#004d61",
+                        "on-background": "#1a1c1c",
+                        "tertiary": "#5e5e5e",
+                        "inverse-surface": "#2f3131",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#e4e2e1"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Public Sans"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background font-body text-on-surface min-h-screen">
+<!-- TopAppBar: w-64 = sidebar; content shell is left-aligned max-w-6xl + px-8 (same as main — no mx-auto centering, avoids zoom drift) -->
+<header class="sticky top-0 z-50 flex w-full max-w-full items-stretch border-b border-zinc-200/80 bg-slate-50 dark:border-zinc-800 dark:bg-zinc-900">
+<!-- Cemstone logo: centered over the dark nav / sidebar column (desktop) -->
+<div class="hidden w-64 shrink-0 items-center justify-center px-2 py-3 lg:flex">
+<img alt="Cemstone Industrial" class="h-[2.925rem] w-auto max-w-[182px] object-contain" src="CemstoneCMYK_Registered.webp"/>
+</div>
+<!-- Portal title + actions: same box as main — w-full max-w-6xl px-8, not centered in the remaining viewport -->
+<div class="flex min-w-0 flex-1 items-center py-3">
+<div class="flex w-full min-w-0 max-w-6xl flex-row items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
+<div class="flex min-w-0 items-center gap-3">
+<img alt="Cemstone Industrial" class="h-[2.925rem] w-auto max-w-[140px] shrink-0 object-contain lg:hidden" src="CemstoneCMYK_Registered.webp"/>
+<span class="truncate text-xl font-black tracking-tight text-zinc-900 dark:text-white font-headline">Supplier EPD Portal</span>
+</div>
+<div class="flex shrink-0 items-center">
+<img alt="User profile avatar" class="h-8 w-8 rounded-full border border-outline-variant" data-alt="professional headshot of a corporate manager in a clean studio setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuTQoVz7wA2fEsIyW68bZqsPwsjmSmuxSTTE3Hp1MBAFGeiYNIn3-sKaXyYZ70lpFVCbdkg1LEDba7z44pIU9GokRGUZKFkH2EM9q6gDT8cILoxc-2kFh6tWthaGYLX-6ckEAgt6EYqzrhoMzTmvRLfhsjGf2-EObaC16R3alAUkTPfK3JfRtbkkPGWvE4bxk4C-jK6YXM2SLDpIQ3r4VvfE80KIYxZc81O4yajYUy3KsTty42Vr9xuMjGSP3vNmjncLV7y37rCnY"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex">
+<!-- SideNavBar -->
+<aside class="bg-zinc-100 dark:bg-zinc-950 fixed left-0 top-[56px] h-[calc(100vh-56px)] w-64 flex flex-col py-4 space-y-2 hidden lg:flex">
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 bg-cyan-700 text-white dark:bg-cyan-600 font-bold px-4 py-3 mb-1 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="precision_manufacturing">precision_manufacturing</span>
+<span class="text-sm">Raw Materials</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-600 dark:text-zinc-400 px-4 py-3 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="local_shipping">local_shipping</span>
+<span class="text-sm">Transportation</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-600 dark:text-zinc-400 px-4 py-3 hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="text-sm">Utilities</span>
+</a>
+</nav>
+<div class="mt-auto px-4 py-4 border-t border-zinc-200 dark:border-zinc-800">
+<button class="w-full bg-primary-container text-on-primary py-2.5 text-xs font-bold tracking-wide uppercase hover:bg-primary transition-colors mb-3" type="button">Contact us</button>
+<a class="flex items-center gap-3 text-zinc-500 px-2 py-2 text-sm hover:text-cyan-700" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+<a class="flex items-center gap-3 text-zinc-500 px-2 py-2 text-sm hover:text-cyan-700" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help">help</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 w-full min-w-0 max-w-6xl px-4 pt-8 pb-0 sm:px-6 lg:ml-64 lg:mr-auto lg:px-8">
+<!-- Hero Header: px-8 matches form card p-8 so title/intro align with inner fields -->
+<div class="mb-5 px-8">
+<h1 class="text-4xl font-black font-headline tracking-tight text-on-surface mb-2">Supplier Environmental Data Entry</h1>
+<p class="text-sm text-zinc-600 mb-0 w-full max-w-none">Provide environmental data for materials you supply to Cemstone Industrial. This form covers <strong class="text-on-surface font-semibold">A1 — raw materials</strong> only. Fields match the EPD PCR so your submission can be used without back-and-forth clarification. <strong class="text-on-surface font-semibold">Please respond within one week</strong> of receiving this request.</p>
+</div>
+<!-- NetSuite-style Form Structure -->
+<div class="bg-surface-container-lowest p-8 border border-outline-variant/10 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_14px_-2px_rgba(0,0,0,0.07)] space-y-12">
+<!-- Information Grid: one 2-col grid so each row aligns (helper text under Location stays in row 2) -->
+<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-16 md:gap-y-5 gap-y-6">
+<h2 class="text-sm tracking-wide text-black font-bold font-headline border-b border-surface-container-highest pb-2 mb-0 order-1 md:order-none">User Information</h2>
+<h2 class="text-sm tracking-wide text-black font-bold font-headline border-b border-surface-container-highest pb-2 mb-0 order-5 md:order-none">Supplier Information</h2>
+<div class="grid grid-cols-3 items-center gap-x-2 order-2 md:order-none">
+<label class="text-sm font-medium text-secondary">Submitter Name</label>
+<input class="col-span-2 border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" type="text" value="Marcus Chen"/>
+</div>
+<div class="grid grid-cols-3 items-center gap-x-2 order-6 md:order-none">
+<label class="text-sm font-medium text-secondary">Supplier Name</label>
+<input class="col-span-2 border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" readonly="" type="text" value="Industrial Solutions Group"/>
+</div>
+<div class="grid grid-cols-3 items-start gap-x-2 order-3 md:order-none">
+<label class="text-sm font-medium text-secondary pt-1.5">Email Address</label>
+<input class="col-span-2 border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" type="email" value="m.chen@industrial-supply.com"/>
+</div>
+<div class="grid grid-cols-3 items-start gap-x-2 order-7 md:order-none">
+<label class="text-sm font-medium text-secondary pt-1.5">Supplier Location</label>
+<div class="col-span-2 min-w-0">
+<input class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm bg-zinc-50 text-on-surface" readonly="" type="text" value="1420 Industrial Blvd, Minneapolis, MN 55401"/>
+<p class="text-xs text-zinc-500 mt-1 italic leading-snug">Autofilled from supplier intake form</p>
+</div>
+</div>
+<div class="grid grid-cols-3 items-center gap-x-2 order-4 md:order-none">
+<label class="text-sm font-medium text-secondary">Department</label>
+<select class="col-span-2 border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm">
+<option>Sustainability &amp; Compliance</option>
+<option>Procurement</option>
+<option>Operations</option>
+</select>
+</div>
+<div class="grid grid-cols-3 items-center gap-x-2 order-8 md:order-none">
+<label class="text-sm font-medium text-secondary">Reporting date</label>
+<input class="col-span-2 border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" type="date" value="2026-04-03"/>
+</div>
+</div>
+<!-- Raw materials entry (A1) — taxonomy + impact assessment per material type -->
+<div class="mt-12" id="raw-materials">
+<h2 class="text-sm tracking-wide text-black font-bold font-headline border-b border-surface-container-highest pb-2 mb-2">Raw Materials</h2>
+<p class="text-sm text-zinc-600 mb-6 w-full max-w-none">For each material you supply, choose the <strong class="text-on-surface font-semibold">category</strong> and <strong class="text-on-surface font-semibold">material type</strong> from the lists (PCR-aligned). Enter mix quantities and, for that material type, the <strong class="text-on-surface font-semibold">environmental impact assessment</strong> values from your EPD, LCA, or supplier documentation.</p>
+<div id="material-rows" class="space-y-6">
+<!-- Example row 1 -->
+<article class="border border-outline-variant/20 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08),0_6px_20px_-4px_rgba(0,0,0,0.12)]" data-material-card="">
+<h3 class="text-sm tracking-wide text-black font-bold font-headline border-b border-surface-container-highest px-4 sm:px-5 pt-4 sm:pt-5 pb-2" data-material-heading="">Material</h3>
+<div class="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 gap-y-3 items-end border-b border-outline-variant/10 bg-surface-container-lowest">
+<div class="lg:col-span-3">
+<label class="text-xs font-semibold text-secondary block mb-1">Category</label>
+<select class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" data-material-category="">
+<option selected="">Cementitious Materials</option>
+<option>Aggregate</option>
+<option>Admix</option>
+<option>Fibers</option>
+<option>Pigments</option>
+</select>
+</div>
+<div class="lg:col-span-4">
+<label class="text-xs font-semibold text-secondary block mb-1">Material type</label>
+<select class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" data-material-type="">
+<option selected="">Type I/II Cement</option>
+<option>Type IL Cement</option>
+<option>Fly Ash</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<label class="text-xs font-semibold text-secondary block mb-1">Quantity (kg)</label>
+<input class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono text-right" type="text" value="1,450.00"/>
+</div>
+<div class="lg:col-span-2">
+<label class="text-xs font-semibold text-secondary block mb-1">Recycled content %</label>
+<input class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" type="text" value="0"/>
+</div>
+<div class="lg:col-span-1 flex justify-end lg:justify-start pb-1">
+<button class="text-sm text-zinc-500 hover:text-primary hover:underline disabled:opacity-40 disabled:pointer-events-none disabled:no-underline" data-remove-material="" type="button">Remove</button>
+</div>
+</div>
+<div class="p-4 sm:p-5 bg-surface-container-low/80">
+<h4 class="text-[11px] uppercase tracking-wider text-zinc-500 font-bold mb-1">Environmental impact assessment</h4>
+<p class="text-xs text-zinc-500 mb-4">Report values for <strong class="text-on-surface">this material type</strong> (per your declared unit). Units are fixed for PCR consistency.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+<div>
+<label class="text-xs font-medium text-secondary block">Global warming potential</label>
+<span class="text-[10px] text-zinc-500">kg CO<sub>2</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" type="text" value="279"/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Stratospheric ozone depletion (ODP)</label>
+<span class="text-[10px] text-zinc-500">kg CFC-11-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" type="text" value="0.00757"/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Eutrophication potential</label>
+<span class="text-[10px] text-zinc-500">kg N-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" type="text" value="0.31"/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Acidification potential (AP)</label>
+<span class="text-[10px] text-zinc-500">kg SO<sub>2</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" type="text" value="0.57"/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Photochemical ozone creation (POCP)</label>
+<span class="text-[10px] text-zinc-500">kg O<sub>3</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" type="text" value="10.5"/>
+</div>
+</div>
+</div>
+</article>
+<!-- Example row 2 -->
+<article class="border border-outline-variant/20 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08),0_6px_20px_-4px_rgba(0,0,0,0.12)]" data-material-card="">
+<h3 class="text-sm tracking-wide text-black font-bold font-headline border-b border-surface-container-highest px-4 sm:px-5 pt-4 sm:pt-5 pb-2" data-material-heading="">Material</h3>
+<div class="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 gap-y-3 items-end border-b border-outline-variant/10 bg-surface-container-lowest">
+<div class="lg:col-span-3">
+<label class="text-xs font-semibold text-secondary block mb-1">Category</label>
+<select class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" data-material-category="">
+<option>Cementitious Materials</option>
+<option selected="">Aggregate</option>
+<option>Admix</option>
+<option>Fibers</option>
+<option>Pigments</option>
+</select>
+</div>
+<div class="lg:col-span-4">
+<label class="text-xs font-semibold text-secondary block mb-1">Material type</label>
+<select class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" data-material-type="">
+<option>Crushed Agg.</option>
+<option>Natural Agg.</option>
+<option>Lightweight Agg.</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<label class="text-xs font-semibold text-secondary block mb-1">Quantity (kg)</label>
+<input class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono text-right" type="text" value="2,890.00"/>
+</div>
+<div class="lg:col-span-2">
+<label class="text-xs font-semibold text-secondary block mb-1">Recycled content %</label>
+<input class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" type="text" value="15"/>
+</div>
+<div class="lg:col-span-1 flex justify-end lg:justify-start pb-1">
+<button class="text-sm text-zinc-500 hover:text-primary hover:underline disabled:opacity-40 disabled:pointer-events-none disabled:no-underline" data-remove-material="" type="button">Remove</button>
+</div>
+</div>
+<div class="p-4 sm:p-5 bg-surface-container-low/80">
+<h4 class="text-[11px] uppercase tracking-wider text-zinc-500 font-bold mb-1">Environmental impact assessment</h4>
+<p class="text-xs text-zinc-500 mb-4">Report values for <strong class="text-on-surface">this material type</strong> (per your declared unit). Units are fixed for PCR consistency.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+<div>
+<label class="text-xs font-medium text-secondary block">Global warming potential</label>
+<span class="text-[10px] text-zinc-500">kg CO<sub>2</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 279" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Stratospheric ozone depletion (ODP)</label>
+<span class="text-[10px] text-zinc-500">kg CFC-11-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 0.00757" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Eutrophication potential</label>
+<span class="text-[10px] text-zinc-500">kg N-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 0.31" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Acidification potential (AP)</label>
+<span class="text-[10px] text-zinc-500">kg SO<sub>2</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 0.57" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Photochemical ozone creation (POCP)</label>
+<span class="text-[10px] text-zinc-500">kg O<sub>3</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 10.5" type="text" value=""/>
+</div>
+</div>
+</div>
+</article>
+</div>
+<div class="mt-4">
+<button class="inline-flex items-center gap-2 border-2 border-primary text-primary px-4 py-2 text-sm font-bold hover:bg-primary-container hover:text-on-primary hover:border-primary-container hover:opacity-90 transition-opacity" id="add-material-btn" type="button">
+<span class="material-symbols-outlined text-lg leading-none" data-icon="add">add</span>
+Add another material
+</button>
+</div>
+<template id="material-row-template">
+<article class="border border-outline-variant/20 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08),0_6px_20px_-4px_rgba(0,0,0,0.12)]" data-material-card="">
+<h3 class="text-sm tracking-wide text-black font-bold font-headline border-b border-surface-container-highest px-4 sm:px-5 pt-4 sm:pt-5 pb-2" data-material-heading="">Material</h3>
+<div class="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 gap-y-3 items-end border-b border-outline-variant/10 bg-surface-container-lowest">
+<div class="lg:col-span-3">
+<label class="text-xs font-semibold text-secondary block mb-1">Category</label>
+<select class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" data-material-category="">
+<option selected="">Cementitious Materials</option>
+<option>Aggregate</option>
+<option>Admix</option>
+<option>Fibers</option>
+<option>Pigments</option>
+</select>
+</div>
+<div class="lg:col-span-4">
+<label class="text-xs font-semibold text-secondary block mb-1">Material type</label>
+<select class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" data-material-type=""></select>
+</div>
+<div class="lg:col-span-2">
+<label class="text-xs font-semibold text-secondary block mb-1">Quantity (kg)</label>
+<input class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono text-right" placeholder="0.00" type="text" value=""/>
+</div>
+<div class="lg:col-span-2">
+<label class="text-xs font-semibold text-secondary block mb-1">Recycled content %</label>
+<input class="w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm" placeholder="0" type="text" value=""/>
+</div>
+<div class="lg:col-span-1 flex justify-end lg:justify-start pb-1">
+<button class="text-sm text-zinc-500 hover:text-primary hover:underline disabled:opacity-40 disabled:pointer-events-none disabled:no-underline" data-remove-material="" type="button">Remove</button>
+</div>
+</div>
+<div class="p-4 sm:p-5 bg-surface-container-low/80">
+<h4 class="text-[11px] uppercase tracking-wider text-zinc-500 font-bold mb-1">Environmental impact assessment</h4>
+<p class="text-xs text-zinc-500 mb-4">Report values for <strong class="text-on-surface">this material type</strong> (per your declared unit). Units are fixed for PCR consistency.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+<div>
+<label class="text-xs font-medium text-secondary block">Global warming potential</label>
+<span class="text-[10px] text-zinc-500">kg CO<sub>2</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 279" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Stratospheric ozone depletion (ODP)</label>
+<span class="text-[10px] text-zinc-500">kg CFC-11-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 0.00757" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Eutrophication potential</label>
+<span class="text-[10px] text-zinc-500">kg N-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 0.31" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Acidification potential (AP)</label>
+<span class="text-[10px] text-zinc-500">kg SO<sub>2</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 0.57" type="text" value=""/>
+</div>
+<div>
+<label class="text-xs font-medium text-secondary block">Photochemical ozone creation (POCP)</label>
+<span class="text-[10px] text-zinc-500">kg O<sub>3</sub>-eq</span>
+<input class="mt-1 w-full border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-1.5 px-3 rounded-sm font-mono" placeholder="e.g. 10.5" type="text" value=""/>
+</div>
+</div>
+</div>
+</article>
+</template>
+</div>
+<div class="mt-10">
+<label class="text-xs uppercase tracking-widest text-zinc-500 font-bold block mb-2">Additional notes (optional)</label>
+<p class="text-xs text-zinc-500 mb-2 max-w-2xl">Use for caveats, data sources, or context that does not fit the structured fields above.</p>
+<textarea class="w-full min-h-[88px] border-zinc-300 focus:border-primary-container focus:ring-0 text-sm py-2 px-3 rounded-sm" placeholder="e.g., Values are from 2024 plant-specific LCA; GWP excludes biogenic carbon per PCR…"></textarea>
+</div>
+<!-- Documentation Section -->
+<div class="mt-16 bg-surface-container-low p-6">
+<h3 class="text-sm font-bold text-secondary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="attachment">attachment</span>
+                        Supporting Documentation
+                    </h3>
+<div class="border-2 border-dashed border-outline-variant bg-white p-12 text-center">
+<span class="material-symbols-outlined text-4xl text-zinc-300 mb-2" data-icon="upload_file">upload_file</span>
+<p class="text-sm text-zinc-500">Drag and drop EPD certificates, LCA reports, or production logs here — optional if you prefer to supply documentation instead of typing all fields above.</p>
+<button class="mt-4 px-6 py-2 border border-primary text-primary text-sm font-bold hover:bg-primary-container hover:text-on-primary hover:border-primary-container hover:opacity-90 transition-opacity" type="button">Browse Files</button>
+</div>
+</div>
+<div class="mt-8 flex flex-wrap gap-4 justify-end border-t border-outline-variant/20 pt-8">
+<button class="border-2 border-outline-variant px-8 py-2 font-bold hover:bg-surface-container-low transition-all" type="button">Save Draft</button>
+<button class="border-2 border-outline-variant px-8 py-2 font-bold hover:bg-surface-container-low transition-all" type="button">Cancel</button>
+<button class="bg-primary text-on-primary px-8 py-2 font-bold hover:bg-primary-container transition-all border-l-4 border-primary-container" type="submit">Submit</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer: logo right-aligned within same max-w-6xl shell as main -->
+<footer class="mt-0 w-full border-t border-zinc-200/80 bg-zinc-50 py-3 dark:border-zinc-800 dark:bg-zinc-900">
+<div class="flex w-full justify-end lg:ml-64 lg:mr-auto">
+<div class="flex w-full max-w-6xl justify-end px-4 sm:px-6 lg:px-8">
+<img alt="Cemstone" class="h-10 w-10 shrink-0 object-contain" height="40" src="small_logo.png" width="40"/>
+</div>
+</div>
+</footer>
+<script>
+(function () {
+  var MATERIALS_BY_CATEGORY = {
+    'Cementitious Materials': ['Type I/II Cement', 'Type IL Cement', 'Fly Ash'],
+    'Aggregate': ['Crushed Agg.', 'Natural Agg.', 'Lightweight Agg.'],
+    'Admix': ['Admixture A', 'Admixture B'],
+    'Fibers': ['Fiber A', 'Fiber B', 'Fiber C'],
+    'Pigments': ['Pigment A', 'Pigment B', 'Pigment C']
+  };
+
+  function fillMaterialOptions(materialSelect, category, selectedValue) {
+    var names = MATERIALS_BY_CATEGORY[category] || [];
+    materialSelect.innerHTML = '';
+    names.forEach(function (name) {
+      var o = document.createElement('option');
+      o.value = name;
+      o.textContent = name;
+      if (selectedValue && name === selectedValue) o.selected = true;
+      materialSelect.appendChild(o);
+    });
+    if (!selectedValue && names.length) materialSelect.selectedIndex = 0;
+  }
+
+  var rowsContainer = document.getElementById('material-rows');
+  var templateEl = document.getElementById('material-row-template');
+  var addBtn = document.getElementById('add-material-btn');
+
+  function renumberMaterialHeadings() {
+    if (!rowsContainer) return;
+    var cards = rowsContainer.querySelectorAll('[data-material-card]');
+    cards.forEach(function (card, index) {
+      var h = card.querySelector('[data-material-heading]');
+      if (h) h.textContent = 'Material ' + (index + 1);
+    });
+  }
+
+  function updateRemoveButtons() {
+    if (!rowsContainer) return;
+    var cards = rowsContainer.querySelectorAll('[data-material-card]');
+    var onlyOne = cards.length <= 1;
+    cards.forEach(function (card) {
+      var btn = card.querySelector('[data-remove-material]');
+      if (!btn) return;
+      btn.disabled = onlyOne;
+      btn.setAttribute('aria-disabled', onlyOne ? 'true' : 'false');
+      btn.title = onlyOne ? 'At least one material row is required' : '';
+    });
+  }
+
+  function wireMaterialCard(card) {
+    var cat = card.querySelector('[data-material-category]');
+    var mat = card.querySelector('[data-material-type]');
+    if (!cat || !mat) return;
+
+    cat.addEventListener('change', function () {
+      fillMaterialOptions(mat, cat.value, null);
+    });
+
+    var removeBtn = card.querySelector('[data-remove-material]');
+    if (removeBtn) {
+      removeBtn.addEventListener('click', function () {
+        if (!rowsContainer || rowsContainer.querySelectorAll('[data-material-card]').length <= 1) return;
+        card.remove();
+        renumberMaterialHeadings();
+        updateRemoveButtons();
+      });
+    }
+  }
+
+  function initMaterialRows() {
+    if (!rowsContainer || !templateEl || !addBtn) return;
+
+    rowsContainer.querySelectorAll('[data-material-card]').forEach(function (card) {
+      wireMaterialCard(card);
+      var cat = card.querySelector('[data-material-category]');
+      var mat = card.querySelector('[data-material-type]');
+      if (cat && mat && mat.options.length === 0) {
+        fillMaterialOptions(mat, cat.value, null);
+      }
+    });
+
+    addBtn.addEventListener('click', function () {
+      var frag = templateEl.content.cloneNode(true);
+      rowsContainer.appendChild(frag);
+      var inserted = rowsContainer.lastElementChild;
+      if (!inserted || !inserted.matches('[data-material-card]')) return;
+      wireMaterialCard(inserted);
+      var c = inserted.querySelector('[data-material-category]');
+      var m = inserted.querySelector('[data-material-type]');
+      if (c && m) fillMaterialOptions(m, c.value, null);
+      renumberMaterialHeadings();
+      updateRemoveButtons();
+    });
+
+    renumberMaterialHeadings();
+    updateRemoveButtons();
+  }
+
+  initMaterialRows();
+})();
+</script>
+</body></html>
