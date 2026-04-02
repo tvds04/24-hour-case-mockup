@@ -1,0 +1,5 @@
+# Only Mockups/ is versioned; ignore everything else at repo root.
+*
+!.gitignore
+!Mockups/
+!Mockups/**
