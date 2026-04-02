@@ -3,7 +3,7 @@
 <html class="light overflow-x-hidden" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Supplier EPD Data Portal</title>
+<title>Supplier EPD Data Form</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&amp;family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -96,7 +96,7 @@
 <div class="flex w-full min-w-0 max-w-6xl flex-row items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
 <div class="flex min-w-0 flex-1 items-center gap-3">
 <img alt="Cemstone Industrial" class="h-[2.925rem] w-auto max-w-[140px] shrink-0 object-contain lg:hidden" src="CemstoneCMYK_Registered.webp"/>
-<span class="min-w-0 shrink truncate text-4xl font-black font-headline tracking-tight text-on-surface dark:text-zinc-100">Supplier EPD Data Portal</span>
+<span class="min-w-0 shrink truncate text-4xl font-black font-headline tracking-tight text-on-surface dark:text-zinc-100">Supplier EPD Data Form</span>
 </div>
 <div class="flex shrink-0 items-center">
 <img alt="User profile avatar" class="h-8 w-8 rounded-full border border-outline-variant" data-alt="professional headshot of a corporate manager in a clean studio setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuTQoVz7wA2fEsIyW68bZqsPwsjmSmuxSTTE3Hp1MBAFGeiYNIn3-sKaXyYZ70lpFVCbdkg1LEDba7z44pIU9GokRGUZKFkH2EM9q6gDT8cILoxc-2kFh6tWthaGYLX-6ckEAgt6EYqzrhoMzTmvRLfhsjGf2-EObaC16R3alAUkTPfK3JfRtbkkPGWvE4bxk4C-jK6YXM2SLDpIQ3r4VvfE80KIYxZc81O4yajYUy3KsTty42Vr9xuMjGSP3vNmjncLV7y37rCnY"/>
@@ -137,10 +137,6 @@
 </aside>
 <!-- Main Content -->
 <main class="flex-1 w-full min-w-0 max-w-6xl px-4 pt-8 pb-0 sm:px-6 lg:mr-auto lg:pl-72 lg:pr-8 lg:pt-4">
-<!-- Hero Header: lg:pt-4 aligns intro with top of sidebar nav (aside py-4); px-8 matches form card p-8 -->
-<div class="mb-5 px-8">
-<p class="text-sm text-zinc-600 mb-0 w-full max-w-none">Provide environmental data for materials you supply to Cemstone Industrial. This form covers <strong class="text-on-surface font-semibold">A1 — raw materials</strong> only. Fields match the EPD PCR so your submission can be used without back-and-forth clarification. <strong class="text-on-surface font-semibold">Please respond within one week</strong> of receiving this request.</p>
-</div>
 <!-- NetSuite-style Form Structure -->
 <div class="bg-surface-container-lowest p-8 border border-outline-variant/10 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_14px_-2px_rgba(0,0,0,0.07)] space-y-12">
 <!-- Information Grid: one 2-col grid so each row aligns (helper text under Location stays in row 2) -->
@@ -181,8 +177,7 @@
 </div>
 <!-- Raw materials entry (A1) — taxonomy + impact assessment per material type -->
 <div class="mt-12" id="raw-materials">
-<h2 class="text-base tracking-wide text-black font-bold font-headline border-b border-surface-container-highest pb-2 mb-2">Raw Materials</h2>
-<p class="text-sm text-zinc-600 mb-6 w-full max-w-none">For each material you supply, choose the <strong class="text-on-surface font-semibold">category</strong> and <strong class="text-on-surface font-semibold">material type</strong> from the lists (PCR-aligned). Enter mix quantities and, for that material type, the <strong class="text-on-surface font-semibold">environmental impact assessment</strong> values from your EPD, LCA, or supplier documentation.</p>
+<h2 class="text-base tracking-wide text-black font-bold font-headline border-b border-surface-container-highest pb-2 mb-6">Raw Materials</h2>
 <div id="material-rows" class="space-y-6">
 <!-- Example row 1 -->
 <article class="border border-outline-variant/20 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08),0_6px_20px_-4px_rgba(0,0,0,0.12)]" data-material-card="">
